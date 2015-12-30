@@ -1,0 +1,23 @@
+- Add i3 config
+- Linux desktop:
+  - Configure terminal
+  - Programmatically set keyboard remapping
+  - Connect clipboards
+- Try config on Arch
+  - Identify pacman package names
+- Add brew config to Ansible playbook
+- Ansible
+  - Docker setup
+  - Add other langs
+    - Elm
+    - Elixir
+    - Scala
+    - Clojure
+    - Ruby
+- Add aesthetic touches
+  - Extra fonts
+  - Arc theme
+  - Compositor
+  - Rofi config
+- Clean out unused packages
+

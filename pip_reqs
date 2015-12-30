@@ -1,0 +1,10 @@
+bpython
+virtualenv
+Flask
+ipython-notebook
+bcrypt
+cryptography
+psycopg
+tweepy
+sendgrid
+

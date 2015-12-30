@@ -1,0 +1,6 @@
+---
+- include: install-packages.yml
+- include: tighten-access.yml
+- include: firewall.yml
+- include: updates.yml
+- include: logwatch.yml

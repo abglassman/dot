@@ -1,0 +1,27 @@
+alias gpull='git pull'
+alias gpom='git pull origin master'
+alias gpush='git push'
+alias gstat='git status'
+alias gcm='git commit -m'
+alias gaa='git add -A'
+
+alias ll='ls -la'
+alias xx='exit'
+
+alias aggo='ag --go'
+alias agrb='ag --ruby'
+alias agpy='ag --python'
+
+alias drun='docker run'
+alias dpull='docker pull'
+alias ds='docker ps'
+alias dsa='docker ps -a'
+alias dkill='docker kill'
+alias drm='docker rm'
+alias dcu='docker-compose up'
+alias denv='eval "$(docker-machine env default)" ; docker-machine env default'
+
+if [ -f ~/.aliases.local ]
+then
+    source ~/.aliases.local
+fi

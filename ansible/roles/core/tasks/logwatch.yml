@@ -1,0 +1,21 @@
+---
+- name: Copy Postfix config
+  template: src=postfix_selections.j2  dest=/tmp/postfix_selections
+
+- name: Apply Postfix config
+  #TODO: verify this works in non-Ubuntu linux
+  command: debconf-set-selections /tmp/postfix_selections
+
+- name: Install logwatch
+  apt: update_cache=yes pkg=logwatch state=installed
+
+- name: Configure logwatch
+  #TODO: verify this works in non-Ubuntu linux
+  lineinfile: >
+              dest=/etc/cron.daily/00logwatch
+              regexp="^/usr/sbin/logwatch"
+              line="/usr/sbin/logwatch --output mail
+              --mailto {{ logwatch_email  | default(user_email) }}
+              --detail high"
+              state=present create=yes
+

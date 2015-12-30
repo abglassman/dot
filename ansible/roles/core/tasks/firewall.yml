@@ -1,0 +1,12 @@
+---
+- name: Firewall- set allow rules
+  shell: ufw allow {{ item }}
+  with_items:
+    - 22/tcp    #SSH
+    - 443/tcp   #HTTPS
+    - 80/tcp    #HTTP
+    - 60023/udp #mosh
+
+- name: Enable firewall
+  shell: ufw --force enable
+

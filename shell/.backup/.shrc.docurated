@@ -1,0 +1,13 @@
+export PATH="/Users/docurated/Development/gocode//bin:/Users/docurated/torch/bin:/usr/local/Cellar/fzf/0.9.4-1/bin:/Users/docurated/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin"
+eval "$(rbenv init -)"
+
+DYNAMO_PATH="$HOME/Development/lib/dynamodb"
+alias dynamo="java -Djava.library.path=$DYNAMO_PATH/DynamoDBLocal_lib -jar $DYNAMO_PATH/DynamoDBLocal.jar -sharedDb"
+alias start_dynamo='cd $DYNAMO_PATH && nohup java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -inMemory -port 8888 > ~/dynamoout.txt 2> ~/dynamoerr.text < /dev/null &'
+
+[[ ${TERM} != 'screen' ]] && exec tmux
+
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
