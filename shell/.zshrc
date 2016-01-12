@@ -1,12 +1,12 @@
-source ~/.profile
 export PATH="$HOME/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+source $HOME/.profile
 export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="agnoster"
 
 HYPHEN_INSENSITIVE="true"
 export DISABLE_AUTO_TITLE="true"
-ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 #
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
