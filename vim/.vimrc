@@ -320,6 +320,9 @@
     " Easier formatting
     nnoremap <silent> <leader>q gwip
 
+    " How often does this happen to you
+    imap :w<CR> <ESC>:w<CR>
+
     " FIXME: Revert this f70be548
     " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
     map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
