@@ -1,2 +1,2 @@
-[ -f "$HOME/.profile.local" ] && source $HOME/.profile.local
-source $HOME/.aliases
+[ -f ~/.profile.local ] && source ~/.profile.local
+source ~/.aliases
