@@ -73,7 +73,7 @@
     " set mouse=a                 " Automatically enable mouse usage
     set mousehide               " Hide the mouse cursor while typing
     scriptencoding utf-8
-    set timeoutlen=50 ttimeoutlen=0
+    set timeoutlen=250 ttimeoutlen=0
 
     if has('clipboard')
         if has('unnamedplus')  " When possible use + register for copy-paste
@@ -195,6 +195,7 @@
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     " autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType yaml setl indentkeys-=<:>
     " preceding line best in a plugin but here for now.
 " }
 
@@ -475,6 +476,7 @@
     " }
 
     " HTML/CSS {
+        Plug 'mattn/emmet-vim'
         Plug 'amirh/HTML-AutoCloseTag'
         Plug 'hail2u/vim-css3-syntax'
         Plug 'gorodinskiy/vim-coloresque'
