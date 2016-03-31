@@ -73,7 +73,7 @@
     " set mouse=a                 " Automatically enable mouse usage
     set mousehide               " Hide the mouse cursor while typing
     scriptencoding utf-8
-    set timeoutlen=50 ttimeoutlen=0
+    set timeoutlen=250 ttimeoutlen=0
 
     if has('clipboard')
         if has('unnamedplus')  " When possible use + register for copy-paste
@@ -389,6 +389,7 @@
         "     Plug 'Lokaltog/vim-powerline'
         " else
         Plug 'bling/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
         "endif
         " Plug 'bling/vim-bufferline'
         Plug 'jistr/vim-nerdtree-tabs'
@@ -478,6 +479,7 @@
     " }
 
     " HTML/CSS {
+        Plug 'mattn/emmet-vim'
         Plug 'amirh/HTML-AutoCloseTag'
         Plug 'hail2u/vim-css3-syntax'
         Plug 'gorodinskiy/vim-coloresque'
