@@ -195,6 +195,7 @@
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     " autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType yaml setl indentkeys-=<:>
     " preceding line best in a plugin but here for now.
 " }
 
