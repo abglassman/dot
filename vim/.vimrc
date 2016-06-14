@@ -450,9 +450,15 @@
     " }
 
     " Snippets & AutoComplete {
-         Plug 'Shougo/neocomplete.vim'
-         Plug 'SirVer/ultisnips'
-         Plug 'ervandew/supertab'
+         if has("lua")
+            Plug 'Shougo/neocomplete.vim'
+         endif
+         if v:version > 704
+             Plug 'SirVer/ultisnips'
+         endif
+         if exists("pumvisible")
+             Plug 'ervandew/supertab'
+         end
     " }
 
     " Python {
@@ -481,7 +487,7 @@
 
     " HTML/CSS {
         Plug 'mattn/emmet-vim'
-        Plug 'amirh/HTML-AutoCloseTag'
+        "Plug 'amirh/HTML-AutoCloseTag'
         Plug 'hail2u/vim-css3-syntax'
         Plug 'gorodinskiy/vim-coloresque'
         Plug 'tpope/vim-haml'
@@ -510,7 +516,7 @@
         Plug 'tpope/vim-markdown'
         Plug 'spf13/vim-preview'
         Plug 'cespare/vim-toml'
-        "Plug 'saltstack/salt-vim'
+        Plug 'saltstack/salt-vim'
     " }
 
     if filereadable(expand('~/.vimrc.plugins.local'))
@@ -811,7 +817,7 @@
         let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
         inoremap <expr><S-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
-        inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+        "inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
         inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<TAB>"
         let g:SuperTabDefaultCompletionType = "context"
 
@@ -822,6 +828,29 @@
         let g:UltiSnipsEditSplit="horizontal"
     " }
 "}
+
+    " Tab key is overloaded by several plugins, need some logic
+    function! s:zen_html_tab()
+        let line = getline('.')
+        if match(line, '<.*>') >= 0
+            return <Plug>(emmet-expand-abbr)
+        endif
+        return <Plug>(emmet-move-next)
+    endfunction
+
+    function! TabByContext()
+        if exists("UltiSnips")
+            if len(UltiSnips#SnippetsInCurrentScope()) > 0)
+                call UltiSnips#ExpandSnippetOrJump()
+                return
+            endif
+        endif
+        return pumvisible() ? "\<C-n>" :
+        \ emmet#isExpandable() ? "\<Plug>(emmet-expand-abbr)" :
+        \ match(getline('.'), '<.*>') >= 0 ? "\<Plug>(emmet-move-next)" :
+        \ "\<tab>"
+    endfunction
+    imap <expr><Tab> TabByContext()
 
     " Golang Settings {
         "autocmd FileType go setlocal noet ts=8 sw=8 sts=8 noexpandtab
