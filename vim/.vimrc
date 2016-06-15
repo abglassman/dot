@@ -410,6 +410,7 @@
         Plug 'vim-scripts/greenvision'
         Plug 'kristiandupont/shades-of-teal'
         Plug 'ujihisa/unite-colorscheme'
+        Plug 'limadm/vim-blues'
 
         Plug 'vim-scripts/restore_view.vim'
         Plug 'mhinz/vim-signify'
@@ -855,6 +856,3 @@ colorscheme muon
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
-
-
-
