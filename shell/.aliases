@@ -1,6 +1,8 @@
 # General
 alias ll='ls -la'
 alias xx='exit'
+# Sometimes I'm dumb
+alias \:q='exit'
 
 # Git
 alias gpull='git pull'

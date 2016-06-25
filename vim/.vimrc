@@ -454,7 +454,7 @@
          if has("lua")
             Plug 'Shougo/neocomplete.vim'
          endif
-         if v:version > 704
+         if v:version >= 704
              Plug 'SirVer/ultisnips'
          endif
          if exists("pumvisible")
@@ -818,27 +818,19 @@
         let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
         inoremap <expr><S-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
-        "inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-        inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+        inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
         let g:SuperTabDefaultCompletionType = "context"
 
         let g:UltiSnipsSnippetDirectories=["UltiSnips"]
         let g:UltiSnipsExpandTrigger="<Tab>"
-        let g:UltiSnipsJumpForwardTrigger="<C-f>"
-        let g:UltiSnipsJumpBackwardTrigger="<C-b>"
+        let g:UltiSnipsJumpForwardTrigger="<Tab>"
+        let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
         let g:UltiSnipsEditSplit="horizontal"
     " }
 "}
 
     " Tab key is overloaded by several plugins, need some logic
-    function! s:zen_html_tab()
-        let line = getline('.')
-        if match(line, '<.*>') >= 0
-            return <Plug>(emmet-expand-abbr)
-        endif
-        return <Plug>(emmet-move-next)
-    endfunction
-
     function! TabByContext()
         if exists("UltiSnips")
             if len(UltiSnips#SnippetsInCurrentScope()) > 0)
@@ -849,7 +841,7 @@
         return pumvisible() ? "\<C-n>" :
         \ emmet#isExpandable() ? "\<Plug>(emmet-expand-abbr)" :
         \ match(getline('.'), '<.*>') >= 0 ? "\<Plug>(emmet-move-next)" :
-        \ "\<tab>"
+        \ "\<Tab>"
     endfunction
     imap <expr><Tab> TabByContext()
 
