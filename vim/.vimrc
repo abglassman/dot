@@ -20,12 +20,10 @@
 "   - Clean up / streamline completion code
 "   - Audit and organize leader bindings
 "   - Customize status bar
-"   - Try Emmet
 "   - davidhalter/jedi-vim
 "   - tpope/vim-dispatch
-"   - jaxbot/browserlink.vim
 "
-"   Copyright 2015 Adam Glassman
+"   Copyright 2015 & 2016 Adam Glassman
 "
 "   Licensed under the Apache License, Version 2.0 (the "License");
 "   you may not use this file except in compliance with the License.
@@ -784,6 +782,28 @@
 " }
 
     " Completion & Snippet Settings {
+
+        " Tab key is overloaded by several plugins, need some logic
+        function! TabByContext()
+            if pumvisible()
+                return "\<C-n>"
+            endif
+            if exists("UltiSnips")
+                if len(UltiSnips#SnippetsInCurrentScope()) > 0)
+                    call UltiSnips#ExpandSnippetOrJump()
+                    return
+                endif
+            endif
+            if emmet#isExpandable()
+                return "\<Plug>(emmet-expand-abbr)"
+            endif
+            if match(getline('.'), '<.*>') >= 0
+                return "\<Plug>(emmet-move-next)"
+            endif
+            return "\<Tab>"
+        endfunction
+
+
     " neocomplete {
         let g:acp_enableAtStartup = 0
         let g:neocomplete#enable_at_startup = 1
@@ -816,9 +836,13 @@
         let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
         let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
-        inoremap <expr><S-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
-        inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+        " This mapping needs to be added after all plugins have loaded,
+        " hence autocmd VimEnter
+        " http://vi.stackexchange.com/questions/756/how-can-i-redefine-plugin-key-mappings
+        autocmd VimEnter * imap <expr><Tab> TabByContext()
+        inoremap <expr><S-CR>  pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
         inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
+
         let g:SuperTabDefaultCompletionType = "context"
 
         let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -829,20 +853,6 @@
     " }
 "}
 
-    " Tab key is overloaded by several plugins, need some logic
-    function! TabByContext()
-        if exists("UltiSnips")
-            if len(UltiSnips#SnippetsInCurrentScope()) > 0)
-                call UltiSnips#ExpandSnippetOrJump()
-                return
-            endif
-        endif
-        return pumvisible() ? "\<C-n>" :
-        \ emmet#isExpandable() ? "\<Plug>(emmet-expand-abbr)" :
-        \ match(getline('.'), '<.*>') >= 0 ? "\<Plug>(emmet-move-next)" :
-        \ "\<Tab>"
-    endfunction
-    imap <expr><Tab> TabByContext()
 
     " Golang Settings {
         "autocmd FileType go setlocal noet ts=8 sw=8 sts=8 noexpandtab
@@ -877,6 +887,3 @@ colorscheme muon
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
-
-
-
