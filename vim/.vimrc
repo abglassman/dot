@@ -785,15 +785,19 @@
     " Completion & Snippet Settings {
 
         " Tab key is overloaded by several plugins, need some logic
+        let g:ulti_expand_or_jump_res = 0
+        function TryUltiSnip()
+            call UltiSnips#ExpandSnippetOrJump()
+            return g:ulti_expand_or_jump_res
+        endfunction
+
         function! TabByContext()
+            if exists(":UltiSnipsEdit") && len(UltiSnips#SnippetsInCurrentScope()) > 0
+                "call UltiSnips#ExpandSnippetOrJump()
+                return "\<C-y>"
+            endif
             if pumvisible()
                 return "\<C-n>"
-            endif
-            if exists("UltiSnips")
-                if len(UltiSnips#SnippetsInCurrentScope()) > 0)
-                    call UltiSnips#ExpandSnippetOrJump()
-                    return
-                endif
             endif
             if emmet#isExpandable()
                 return "\<Plug>(emmet-expand-abbr)"
@@ -804,6 +808,9 @@
             return "\<Tab>"
         endfunction
 
+        function UltiSnippable()
+            return exists(":UltiSnipsEdit") && len(UltiSnips#SnippetsInCurrentScope()) > 0
+        endfunction
 
     " neocomplete {
         let g:acp_enableAtStartup = 0
@@ -847,8 +854,8 @@
         let g:SuperTabDefaultCompletionType = "context"
 
         let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-        let g:UltiSnipsExpandTrigger="<Tab>"
-        let g:UltiSnipsJumpForwardTrigger="<Tab>"
+        let g:UltiSnipsExpandTrigger="<C-y>"
+        let g:UltiSnipsJumpForwardTrigger="<C-y>"
         let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
         let g:UltiSnipsEditSplit="horizontal"
     " }

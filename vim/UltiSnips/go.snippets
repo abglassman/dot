@@ -12,36 +12,44 @@ endglobal
 
 snippet p "Package declaration"
 package ${1:main}
+
+$2
 endsnippet
 
 snippet imp "Import block"
 import (
 	"${1:fmt}"
+	$2
 )
+$3
 endsnippet
 
 snippet f "Function declaration" b
 func $1($2) $3 {
 	$4
 }
+$5
 endsnippet
 
 snippet fm "Main func" b
 func main() {
 	${1://Main func}
+	$2
 }
 
 endsnippet
 
 snippet test "Test Function" b
 func Test$1(t *testing.T) {
-	$2
+	${2:t.SkipNow()}
 }
+$3
 
 endsnippet
 
 snippet fpf "fmt.Printf"
 fmt.Printf("$1")
+$2
 endsnippet
 
 snippet todo "TODO comment"
