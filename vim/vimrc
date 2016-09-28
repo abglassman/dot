@@ -890,7 +890,9 @@
 nmap <Leader>x :w !sh<CR>
 
 set background=dark
-colorscheme muon
+if filereadable(expand("~/.vim/plugged/vim-colorschemes/colors/muon.vim"))
+    colorscheme muon
+endif
 
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
