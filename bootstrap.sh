@@ -7,6 +7,6 @@ sudo apt-get install ansible git
 cd ~
 
 if [ ! -d "~/.config/dotfiles" ]; then
-	git clone https://github.com/abglassman/dotfiles ~/.config/dotfiles
+	git clone https://github.com/abglassman/dot ~/.config/dotfiles
 fi
 
