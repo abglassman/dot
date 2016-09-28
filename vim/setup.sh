@@ -14,7 +14,7 @@ require_cmd() {
 link_vim() {
     local source_path="$DOTHOME"
 
-    ln -sf "$source_path/vimrc"         "$HOME/.vimrc"
+    ln -sf "$source_path/vim/vimrc"         "$HOME/.vimrc"
 }
 
 sync_repo() {

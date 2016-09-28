@@ -2,7 +2,7 @@
 
 DOT_HOME="$( cd `dirname "$0"` && pwd)"
 
-source ${DOT_HOME}/vim/install.sh
+source ${DOT_HOME}/vim/setup.sh
 
 ln -sf ${DOT_HOME}/bin ${HOME}/bin
 ln -sf ${DOT_HOME}/tmux/tmux.conf ${HOME}/.tmux.conf
