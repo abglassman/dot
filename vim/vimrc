@@ -381,7 +381,7 @@
         Plug 'scrooloose/nerdtree'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'tacahiroy/ctrlp-funky'
-        Plug 'matchit.zip'
+        " Plug 'matchit.zip'
         " if (has("python") || has("python3"))
         "     Plug 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
         " else
@@ -452,9 +452,6 @@
          if has("lua")
             Plug 'Shougo/neocomplete.vim'
          endif
-         if v:version >= 704
-             Plug 'SirVer/ultisnips'
-         endif
          if exists("pumvisible")
              Plug 'ervandew/supertab'
          end
@@ -464,8 +461,8 @@
         " Pick either python-mode or pyflakes & pydoc
         Plug 'klen/python-mode'
         Plug 'yssource/python.vim'
-        Plug 'python_match.vim'
-        Plug 'pythoncomplete'
+        " Plug 'python_match.vim'
+        " Plug 'pythoncomplete'
         Plug 'Glench/Vim-Jinja2-Syntax'
     " }
 
@@ -481,7 +478,7 @@
     " Scala {
         Plug 'derekwyatt/vim-scala'
         Plug 'derekwyatt/vim-sbt'
-        Plug 'xptemplate'
+        " Plug 'xptemplate'
     " }
 
     " HTML/CSS {
@@ -786,16 +783,8 @@
 
         " Tab key is overloaded by several plugins, need some logic
         let g:ulti_expand_or_jump_res = 0
-        function TryUltiSnip()
-            call UltiSnips#ExpandSnippetOrJump()
-            return g:ulti_expand_or_jump_res
-        endfunction
 
         function! TabByContext()
-            if exists(":UltiSnipsEdit") && len(UltiSnips#SnippetsInCurrentScope()) > 0
-                "call UltiSnips#ExpandSnippetOrJump()
-                return "\<C-y>"
-            endif
             if pumvisible()
                 return "\<C-n>"
             endif
@@ -806,10 +795,6 @@
                 return "\<Plug>(emmet-move-next)"
             endif
             return "\<Tab>"
-        endfunction
-
-        function UltiSnippable()
-            return exists(":UltiSnipsEdit") && len(UltiSnips#SnippetsInCurrentScope()) > 0
         endfunction
 
     " neocomplete {
@@ -853,11 +838,6 @@
 
         let g:SuperTabDefaultCompletionType = "context"
 
-        let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-        let g:UltiSnipsExpandTrigger="<C-y>"
-        let g:UltiSnipsJumpForwardTrigger="<C-y>"
-        let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-        let g:UltiSnipsEditSplit="horizontal"
     " }
 "}
 
